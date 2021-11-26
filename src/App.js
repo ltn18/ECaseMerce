@@ -1,21 +1,11 @@
 import React, { useEffect } from 'react';
-import './App.css';
-import Header from "./Header";
-import Home from './Home';
+import Header from "./components/Header";
+import Home from './pages/Home';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Checkout from './Checkout';
-import LogIn from './LogIn';
-import { auth } from './firebase';
+import Checkout from './pages/Checkout';
+import LogIn from './pages/LogIn';
 import { useStateValue } from './StateProvider';
-import Payment from './Payment';
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import Orders from './Orders';
-import Search from './Search';
-
-const promise = loadStripe(
-  'pk_test_51IEpe6JlanqIcLJbuGeGeqCpFAcuPWkLTtrRklFZaH5clVOPaIug7ELzT35ByKzbZdb5P7viDdt0FoJa2tN2UfdG0051OZksMr'
-  );
+import Orders from './pages/Orders';
 
 function App() {
 
@@ -23,24 +13,24 @@ function App() {
   
   useEffect(() => {
 
-    auth.onAuthStateChanged(authUser => {
-      console.log("USER is >>>", authUser);
+    // auth.onAuthStateChanged(authUser => {
+    //   console.log("USER is >>>", authUser);
 
-      if (authUser) {
-        // login
-        dispatch({
-          type: "SET_USER",
-          user: authUser
-        })
-      }
-      else {
-        // logout
-        dispatch({
-          type: "SET_USER",
-          user: null
-        })
-      }
-    })
+    //   if (authUser) {
+    //     // login
+    //     dispatch({
+    //       type: "SET_USER",
+    //       user: authUser
+    //     })
+    //   }
+    //   else {
+    //     // logout
+    //     dispatch({
+    //       type: "SET_USER",
+    //       user: null
+    //     })
+    //   }
+    // })
         
   }, [])
 
@@ -61,18 +51,6 @@ function App() {
           <Route path="/orders">
             <Header />
             <Orders />
-          </Route>
-
-          <Route path="/search">
-            <Header />
-            <Search />
-          </Route>
-
-          <Route path="/payment">
-            <Header />
-            <Elements stripe={promise}>
-              <Payment />
-            </Elements>
           </Route>
 
           <Route path="/">

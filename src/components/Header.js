@@ -1,9 +1,8 @@
 import React from 'react';
-import './Header.css';
+import '../css/Header.css';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { Link, useHistory } from 'react-router-dom';
-import { useStateValue } from './StateProvider';
-import { auth } from './firebase';
+import { useStateValue } from '../StateProvider';
 import SearchIcon from '@material-ui/icons/Search';
 
 const Header = () => {
@@ -12,17 +11,9 @@ const Header = () => {
 
     const history = useHistory();
 
-    const searchFilter = (e) => {
-        history.push("/search");
-        dispatch({
-            type: 'SEARCH',
-            value: e.target.value,
-        })
-    };
-
     const handleAuthentication = () => {
         if (user) {
-            auth.signOut();
+            //auth.signOut();
         }
     }
 
@@ -30,12 +21,12 @@ const Header = () => {
         <div className="header">
             <Link to="/">
                 <img className="header__logo" 
-                    src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="icon"></img>
+                    src="ECaseMerce.jpg"></img>
             </Link>
             <div
                 className="header__search"
             >
-                <input className="header__searchInput" type="text" onChange={searchFilter}></input>    
+                <input className="header__searchInput" type="text"></input>    
                 <SearchIcon className="header__searchIcon"></SearchIcon>
             </div> 
 

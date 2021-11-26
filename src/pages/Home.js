@@ -1,7 +1,7 @@
 import React from 'react';
-import Product from './Product';
+import Product from '../components/Product';
 import Carousel from 'react-bootstrap/Carousel';
-import "./Home.css";
+import "../css/Home.css";
 
 const Home = () => {
     
