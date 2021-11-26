@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "../css/Header.css";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { Link, useHistory } from "react-router-dom";
@@ -17,8 +18,23 @@ const Header = () => {
     }
   };
 
-  const handleSearch = () => {
-    if (searchInput !== "") console.log(searchInput);
+  const processInput = (input) => {
+    let res = "";
+    let s = input.split(" ");
+    for (let i = 0; i < s.length - 1; i++) res += s[i] + "%20";
+    res += s[s.length - 1];
+    return res;
+  };
+
+  const handleSearch = async () => {
+    if (searchInput !== "") {
+      // processed input
+      const pinp = processInput(searchInput);
+      await axios
+        .post(`url/products/search/${pinp}`)
+        .then((res) => console.log(res.data))
+        .catch((err) => console.log(err.message));
+    }
   };
 
   return (

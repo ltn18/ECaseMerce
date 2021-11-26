@@ -1,21 +1,21 @@
-const express = require('express')
-const app = express()
+const express = require("express");
+const app = express();
 
-const products = require('./db/products')
+const products = require("./db/products");
 
-require('dotenv').config();
+require("dotenv").config();
 
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8080;
 
-app.get('/', (request, response) => {
-    response.json('Welcome to our website')
-})
+app.get("/", (request, response) => {
+  response.json("Welcome to our website");
+});
 
-app.get('/products', products.getProducts)
-app.get('/products/:id', products.getProductById)
-app.delete('/products/:id', products.deleteProduct)
+app.get("/products/search/:input", products.getSearchProducts);
+app.get("/products", products.getProducts);
+app.get("/products/:id", products.getProductById);
+app.delete("/products/:id", products.deleteProduct);
 
 app.listen(port, () => {
-    console.log(`App running on port ${port}`)
-})
-
+  console.log(`App running on port ${port}`);
+});
