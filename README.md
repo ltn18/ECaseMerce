@@ -1,1 +1,1 @@
-An e-commerce website with React, Express, Node, and PostgreSQL
+An e-commerce website with React, Express, Node, and MySQL
