@@ -33,6 +33,8 @@ const Home = () => {
             price={229.99}
             image="https://images-na.ssl-images-amazon.com/images/I/51QxA-98Q%2BL._AC_SX342_.jpg"
             rating={5}
+            condition={"New"}
+            qty={5}
           ></Product>
 
           <Product
@@ -41,6 +43,8 @@ const Home = () => {
             price={179.69}
             image="https://images-na.ssl-images-amazon.com/images/I/61zKkP36kDL._AC_SL1500_.jpg"
             rating={4}
+            condition={"Like New"}
+            qty={2}
           ></Product>
 
           <Product
@@ -49,6 +53,8 @@ const Home = () => {
             price={99.99}
             image="https://m.media-amazon.com/images/I/81NfNapLYxL._AC_UY218_.jpg"
             rating={4}
+            condition={"Used"}
+            qty={3}
           ></Product>
         </div>
 

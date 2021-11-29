@@ -2,12 +2,16 @@ const db = require("./db");
 const dbCall = db.dbCall;
 
 const getSearchProducts = (req, res, next) => {
-  const input = req.params.input;
+  const input = req.query.search;
   const splitInput = input.split("%20");
+  console.log(splitInput);
   const sql = "SELECT * FROM products WHERE pattern = % $1%";
-  splitInput((ele) => {
-    dbCall(sql, ele, response.status(200).json());
-  });
+  
+  // splitInput((ele) => {
+  //   dbCall(sql, ele, response.status(200).json());
+  // });
+
+  res.send("OK search");
 };
 
 const getProducts = (request, response) => {

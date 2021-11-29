@@ -30,8 +30,9 @@ const Header = () => {
     if (searchInput !== "") {
       // processed input
       const pinp = processInput(searchInput);
+      // console.log(pinp);
       await axios
-        .post(`url/products/search/${pinp}`)
+        .post(`http://localhost:3000/products?search=${pinp}`)
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err.message));
     }
@@ -67,9 +68,9 @@ const Header = () => {
           <div onClick={handleAuthentication} className="header__option">
             <span className="header__optionLineOne">
               {user
-                ? "Welcome, " +
+                ? "Hi, " +
                   user?.email.substring(0, user?.email.indexOf("@"))
-                : "Welcome, guest"}
+                : "Hi, student"}
             </span>
             <span className="header__optionLineTwo">
               {user ? "Sign out" : "Sign in"}
@@ -78,8 +79,8 @@ const Header = () => {
         </Link>
         <Link className="text-link" to="/orders">
           <div className="header__option">
-            <span className="header__optionLineOne">Returns</span>
-            <span className="header__optionLineTwo">& Orders</span>
+            <span className="header__optionLineOne">My</span>
+            <span className="header__optionLineTwo">Orders</span>
           </div>
         </Link>
         <Link className="text-link" to="/checkout">

@@ -11,7 +11,7 @@ app.get("/", (request, response) => {
   response.json("Welcome to our website");
 });
 
-app.get("/products/search/:input", products.getSearchProducts);
+app.get("/products?search=", products.getSearchProducts);
 app.get("/products", products.getProducts);
 app.get("/products/:id", products.getProductById);
 app.delete("/products/:id", products.deleteProduct);
