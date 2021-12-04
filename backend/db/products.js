@@ -11,11 +11,11 @@ const getSearchProducts = (req, res, next) => {
   //   dbCall(sql, ele, response.status(200).json());
   // });
 
-  res.send("OK search");
+  res.send("OK searched");
 };
 
 const getProducts = (request, response) => {
-  const sql = "SELECT * FROM products ORDER BY id ASC";
+  const sql = "SELECT * FROM products ORDER BY id ASC LIMIT 10";
   dbCall(sql, null, response.status(200).json());
 };
 

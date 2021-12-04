@@ -13,7 +13,7 @@ const deleteFromCart = async (req, res, next) => {
   res.send("OK add to Cart");
 }
 
-const getProdFromCart = async (req, res, next) => {
+const getCart = async (req, res, next) => {
   const sql = "";
   dbCall(sql);
   res.send("OK add to Cart");
@@ -22,5 +22,5 @@ const getProdFromCart = async (req, res, next) => {
 module.exports = {
   addToCart,
   deleteFromCart,
-  getProdFromCart
+  getCart
 }

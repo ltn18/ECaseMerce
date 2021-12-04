@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import axios from "axios";
 import "../css/LogIn.css";
 
 const Register = () => {
@@ -13,6 +12,7 @@ const Register = () => {
   const [retype, setRetype] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [gender, setGender] = useState("");
+  const [name, setName] = useState("");
 
   // need to hash password before push to header
 
@@ -46,6 +46,7 @@ const Register = () => {
                 password: password,
                 phoneNumber: phoneNumber,
                 gender: gender,
+                name: name,
             })
         });
        
@@ -84,21 +85,28 @@ const Register = () => {
           <h5>Confirm Password</h5>
           <input
             type="password"
-            value={password}
+            value={retype}
             onChange={(e) => setRetype(e.target.value)}
+          ></input>
+
+          <h5>Name</h5>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           ></input>
 
           <h5>Phone Number</h5>
           <input
-            type="password"
-            value={password}
+            type="text"
+            value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
           ></input>
 
           <h5>Gender</h5>
           <input
-            type="password"
-            value={password}
+            type="text"
+            value={gender}
             onChange={(e) => setGender(e.target.value)}
           ></input>
 
