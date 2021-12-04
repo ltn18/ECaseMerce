@@ -3,43 +3,45 @@ import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import "../css/LogIn.css";
 
-const LogIn = () => {
+const Register = () => {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // need to hash password before push to header
 
-  const signIn = async () => {
-    // e.preventDefault();
+  const signIn = async (e) => {
+    e.preventDefault();
     // //firebase login
     // auth.signInWithEmailAndPassword(email, password)
     //     .then(auth => {
     //         history.push("/")
     //     })
     //     .catch(error => alert(error.message))
-    await axios
-      .post(`http://localhost:3000/signin`, {
-        headers: {
-          Authorization: email + " " + password,
-        },
-      })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err.message));
+
+    // await axios
+    //   .post(`http://localhost:3000/signin`, {
+    //     headers: {
+    //       Authorization: email + " " + password,
+    //     },
+    //   })
+    //   .then((res) => console.log(res.data))
+    //   .catch((err) => console.log(err.message));
+
+    history.push("/login");
   };
 
   const register = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     // auth.createUserWithEmailAndPassword(email, password)
     //     .then((auth) => {
     //         // successfully create new user
     //         console.log(auth);
     //         if (auth) {
-    //             history.push("/");b
+    //             history.push("/");
     //         }
     //     })
     //     .catch(error => alert(error.message))
-    history.push("/register");
   };
 
   return (
@@ -49,7 +51,7 @@ const LogIn = () => {
       </Link>
 
       <div className="login__container">
-        <h1>Sign-in</h1>
+        <h1>Register</h1>
         <form>
           <h5>CWRU Email</h5>
           <input
@@ -65,26 +67,42 @@ const LogIn = () => {
             onChange={(e) => setPassword(e.target.value)}
           ></input>
 
+          <h5>Confirm Password</h5>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
+
+          <h5>Phone Number</h5>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
+
+          <h5>Gender</h5>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
+
           <button
             className="login__signInButton"
             type="submit"
             onClick={signIn}
           >
-            Sign In
+            Register
           </button>
         </form>
 
-        <p>
-          By signing in you agree to ECaseMerce's Conditions of Use & Sale.
-          Please see our Privacy Notice, our Cookies.
-        </p>
-
-        <button onClick={register} className="login__registerButton">
-          Create your ECaseMerce account
+        <button onClick={signIn} className="login__registerButton">
+          Already have an account? Sign-in
         </button>
       </div>
     </div>
   );
 };
 
-export default LogIn;
+export default Register;

@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Checkout from './pages/Checkout';
 import LogIn from './pages/LogIn';
+import Register from "./pages/Register"
 import { useStateValue } from './StateProvider';
 import Orders from './pages/Orders';
 
@@ -46,6 +47,10 @@ function App() {
 
           <Route path="/login">
             <LogIn />
+          </Route>
+
+          <Route path="/register">
+            <Register />
           </Route>
 
           <Route path="/orders">
