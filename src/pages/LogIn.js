@@ -1,44 +1,83 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import axios from "axios";
 import "../css/LogIn.css";
+import { useStateValue } from '../StateProvider';
+
 
 const LogIn = () => {
+  const URL = `http://localhost:8080/customer/login`
+
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+
+  const [dispatch] = useStateValue();
+
+  const setUser = () => {
+    dispatch({
+      type: "SET_USER",
+      user: {
+        email: email,
+      },
+    });
+  };
+
   // need to hash password before push to header
 
-  const signIn = async () => {
-    // e.preventDefault();
-    // //firebase login
-    // auth.signInWithEmailAndPassword(email, password)
-    //     .then(auth => {
-    //         history.push("/")
-    //     })
-    //     .catch(error => alert(error.message))
-    await axios
-      .post(`http://localhost:3000/signin`, {
-        headers: {
-          Authorization: email + " " + password,
-        },
-      })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err.message));
+  const signIn = async (e) => {
+  //   await axios
+  //     .post(`http://localhost:8080/customer/login`, {
+  //       headers: {
+  //         Authorization: email + " " + password,
+  //       },
+  //     })
+  //     .then((res) => console.log(res.data))
+  //     .catch((err) => console.log(err.message));
+
+
+
+      e.preventDefault();
+      let signInSuccessfully = false;
+      await fetch((URL), {
+          headers: {
+              "Content-Type": "application/json"
+          },
+          method: "POST",
+          body: JSON.stringify({
+              email: email,
+              password: password,
+          })
+
+      }).then(result => {
+              if(result.status === 200) {
+                  alert("Log in successfully");
+                  signInSuccessfully = true;
+              }
+              else if (email === '' || password === '') {
+                  alert("You must not leave fields empty")
+              }
+              else if (result.status === 404) {
+                  alert("Email does not exist")
+              }
+              else if (result.status === 403) {
+                  alert("Incorrect password")
+              }
+              else {
+                  alert("Error")
+              }
+              return result.json();
+          }
+  ).then(data => {
+      if (signInSuccessfully === true) {
+          setUser();
+          setTimeout(() => history.push("/"), 2000);
+      }
+    })
   };
 
   const register = (e) => {
     e.preventDefault();
-    // auth.createUserWithEmailAndPassword(email, password)
-    //     .then((auth) => {
-    //         // successfully create new user
-    //         console.log(auth);
-    //         if (auth) {
-    //             history.push("/");b
-    //         }
-    //     })
-    //     .catch(error => alert(error.message))
     history.push("/register");
   };
 

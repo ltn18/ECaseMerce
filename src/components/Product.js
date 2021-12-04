@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../css/Product.css";
 import { useStateValue } from "../StateProvider";
 
@@ -26,13 +26,6 @@ const Product = ({ id, title, image, price, rating, condition, qty }) => {
           <small>$</small>
           <strong>{price}</strong>
         </p>
-        {/* <div className="product__rating">
-          {Array(rating)
-            .fill()
-            .map((_, i) => (
-              <p>⭐</p>
-            ))}
-        </div> */}
         <div className="product__condition">
           <span>Condition: {condition}</span>
         </div>

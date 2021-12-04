@@ -14,7 +14,7 @@ const Header = () => {
 
   const handleAuthentication = () => {
     if (user) {
-      //auth.signOut();
+
     }
   };
 
@@ -28,11 +28,9 @@ const Header = () => {
 
   const handleSearch = async () => {
     if (searchInput !== "") {
-      // processed input
       const pinp = processInput(searchInput);
-      // console.log(pinp);
       await axios
-        .post(`http://localhost:3000/products?search=${pinp}`)
+        .post(`http://localhost:8080/products?search=${pinp}`)
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err.message));
     }
