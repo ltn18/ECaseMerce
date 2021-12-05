@@ -1,5 +1,4 @@
 require("dotenv").config();
-
 const mysql = require("mysql");
 
 const con = mysql.createConnection({
@@ -7,12 +6,18 @@ const con = mysql.createConnection({
   user: process.env.DBUSER,
   password: process.env.DBPASSWORD,
   database: process.env.DBDATABASE,
+  port: process.env.DBPORT
 });
 
-con.connect((error) => {
-  if (error) throw error;
-  console.log("Database connected!");
-});
+const connectDB = () => {
+  con.connect((error) => {
+    if (error) {
+      throw error;
+    }
+    console.log("Database connected!");
+  });
+}
+
 
 const dbCall = (sql, params, callback) => {
   if (params == null) {
@@ -26,6 +31,7 @@ const dbCall = (sql, params, callback) => {
   } else {
     con.query(sql, params, (error, result) => {
       if (error) {
+        console.log(error)
         throw error;
       } else {
         callback(result);
@@ -36,4 +42,5 @@ const dbCall = (sql, params, callback) => {
 
 module.exports = {
   dbCall,
+  connectDB
 };

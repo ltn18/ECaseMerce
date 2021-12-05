@@ -65,13 +65,13 @@ const Header = () => {
         <Link className="text-link" to={!user && "/login"}>
           <div onClick={handleAuthentication} className="header__option">
             <span className="header__optionLineOne">
-              {user
+              {window.localStorage.getItem("Name")
                 ? "Hi, " +
-                  user?.email.substring(0, user?.email.indexOf("@"))
+                window.localStorage.getItem("Name")
                 : "Hi, student"}
             </span>
             <span className="header__optionLineTwo">
-              {user ? "Sign out" : "Sign in"}
+              {window.localStorage.getItem("Name") ? "Sign out" : "Sign in"}
             </span>
           </div>
         </Link>

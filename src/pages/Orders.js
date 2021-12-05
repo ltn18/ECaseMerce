@@ -2,24 +2,21 @@ import React, { useEffect, useState } from 'react';
 import Order from '../components/Order';
 import "../css/Orders.css";
 import { useStateValue } from '../StateProvider';
+import axios from "axios";
 
 const Orders = () => {
     const [{basket, user}, dispatch] = useStateValue();
-    const [orders, setOrders] = useState([]);
-
-    // useEffect(() => {
-    //     if (user){
-    //     db.collection("users")
-    //         .doc(user?.uid)
-    //         .collection("orders")
-    //         .orderBy("created", "desc")
-    //         .onSnapshot(snapshot => (
-    //             setOrders(snapshot.docs.map(doc => ({
-    //                 id: doc.id,
-    //                 data: doc.data()
-    //             })))
-    //         ))} else { setOrders([])}
-    // }, [user]) 
+    const [orders, setOrder] = useState([])
+    useEffect(() => {
+        const URL = "http://localhost:8080/myorder"
+        const data = {customer_id: window.localStorage.getItem("CustomerID")}
+        console.log("hello from Order")
+        console.log(data)
+        axios.post(URL, data).then((result) => {
+            setOrder(result.data)
+            console.log(result.data)
+    })
+  }, [])
 
     return (
         <div className="orders">

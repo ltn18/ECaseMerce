@@ -1,3 +1,5 @@
+import { LaptopWindowsSharp } from "@material-ui/icons";
+import axios from "axios";
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "../css/LogIn.css";
@@ -14,66 +16,20 @@ const LogIn = () => {
 
   const [dispatch] = useStateValue();
 
-  const setUser = () => {
-    dispatch({
-      type: "SET_USER",
-      user: {
-        email: email,
-      },
-    });
-  };
-
-  // need to hash password before push to header
 
   const signIn = async (e) => {
-  //   await axios
-  //     .post(`http://localhost:8080/customer/login`, {
-  //       headers: {
-  //         Authorization: email + " " + password,
-  //       },
-  //     })
-  //     .then((res) => console.log(res.data))
-  //     .catch((err) => console.log(err.message));
+    e.preventDefault();
+    
+    const data = { email: email, password: password }
+    await axios.post(URL, data).then(result => {
+      console.log(result.data);
+      window.localStorage.setItem('CustomerID', result.data[0].CustomerID)
+      window.localStorage.setItem('Name', result.data[0].Name)
+      window.localStorage.setItem('Email', result.data[0].Email)
 
+      history.push("/");
 
-
-      e.preventDefault();
-      let signInSuccessfully = false;
-      await fetch((URL), {
-          headers: {
-              "Content-Type": "application/json"
-          },
-          method: "POST",
-          body: JSON.stringify({
-              email: email,
-              password: password,
-          })
-
-      }).then(result => {
-              if(result.status === 200) {
-                  alert("Log in successfully");
-                  signInSuccessfully = true;
-              }
-              else if (email === '' || password === '') {
-                  alert("You must not leave fields empty")
-              }
-              else if (result.status === 404) {
-                  alert("Email does not exist")
-              }
-              else if (result.status === 403) {
-                  alert("Incorrect password")
-              }
-              else {
-                  alert("Error")
-              }
-              return result.json();
-          }
-  ).then(data => {
-      if (signInSuccessfully === true) {
-          setUser();
-          setTimeout(() => history.push("/"), 2000);
-      }
-    })
+    }).catch(err => console.log(err.message))
   };
 
   const register = (e) => {

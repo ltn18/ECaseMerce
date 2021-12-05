@@ -34,8 +34,6 @@ const Product = ({ id, title, image, price, rating, condition, qty }) => {
         </div>
       </div>
 
-      <img className="product__image" src={image} alt={title}></img>
-
       <button onClick={addToBasket}>Add to basket</button>
     </div>
   );
